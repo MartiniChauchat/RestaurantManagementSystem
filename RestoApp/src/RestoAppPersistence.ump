@@ -1,0 +1,126 @@
+external interface Serializable{}
+
+class RestoApp{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID =  -2683593616927798071L;
+	public void reinitialize() {
+	  MenuItem.renitializeNameToHashmap(this.getMenu().getMenuItems());
+	  Order.reinitializeNextNumber(this.getOrders());
+	  Reservation.reinitializeNextReservationNumber(this.getReservations());
+	  Table.reinitializeNumberToHashMap(this.getTables());
+	   if(toGoOrders == null) {
+		  toGoOrders = new ArrayList<TogoOrder>();
+	  }
+	  if(currentToGoOrders == null) {
+		  currentToGoOrders = new ArrayList<TogoOrder>();
+	  }
+	  if(toGoBill == null) {
+		  toGoBill = new ArrayList<TogoBill>();
+	  }
+  	}
+  
+}
+class TogoOrder {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 12345678L;
+}
+
+class TogoOrderItem{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 66666666L;
+	
+}
+
+class TogoBill{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 23333333L;
+	
+}
+class Bill{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 1301576255893682821L;
+}
+
+class Menu{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = -7403802774454467836L;
+}
+
+class MenuItem{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = -1776230320092632776L;
+	
+	 public static void renitializeNameToHashmap(List<MenuItem> items) {
+		 menuitemsByName = new HashMap<String, MenuItem>();
+		 for(MenuItem item : items) {
+			 menuitemsByName.put(item.getName(), item);
+		 }
+		 
+	 }
+}
+
+class Order{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID =  -3900912597282882073L;
+	public static void reinitializeNextNumber(List<Order> orders) {
+	  nextNumber = 1;
+	  for(Order order : orders) {
+		  if(order.getNumber() > nextNumber) {
+			  nextNumber = order.getNumber();
+		  }
+	  }
+	  nextNumber ++;
+ 	}
+}
+
+class OrderItem{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 2045406856025012133L; 
+}
+
+class PricedMenuItem{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = -4855219931984388104L;
+}
+
+class Reservation{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 2315072607928790501L;
+	public static void reinitializeNextReservationNumber(List<Reservation> reservations) {
+		nextReservationNumber = 1;
+		for(Reservation r : reservations) {
+			if(r.getReservationNumber() > nextReservationNumber) {
+			nextReservationNumber = r.getReservationNumber();
+		  	}
+	  	}
+  	}
+}
+
+class Seat{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 386717977557499839L; 
+}
+
+class Table{
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID =8896099581655989380L; 
+	public static void reinitializeNumberToHashMap(List<Table> tables) {
+	  tablesByNumber = new  HashMap<Integer, Table>();
+	  for(Table table : tables) {
+		  tablesByNumber.put(table.getNumber(), table);
+	  }
+  	}
+}
